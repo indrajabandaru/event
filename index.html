@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vismayah 2025 - College Event Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #96ceb4 75%, #feca57 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+            to { box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
+        }
+        
+        .bounce-in {
+            animation: bounceIn 1s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 1.2s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 2s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #667eea;
+        }
+        
+        .competition-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .speech-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .timetable-row:nth-child(even) {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-800">Vismayah 2025</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-purple-600 font-medium">About</a>
+                    <a href="#competitions" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Competitions</a>
+                    <a href="#speeches" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Faculty Speeches</a>
+                    <a href="#timetable" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Timetable</a>
+                    <a href="#gallery" class="nav-link text-gray-700 hover:text-purple-600 font-medium">Gallery</a>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-purple-600">Home</a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-purple-600">About</a>
+                <a href="#competitions" class="block px-3 py-2 text-gray-700 hover:text-purple-600">Competitions</a>
+                <a href="#speeches" class="block px-3 py-2 text-gray-700 hover:text-purple-600">Faculty Speeches</a>
+                <a href="#timetable" class="block px-3 py-2 text-gray-700 hover:text-purple-600">Timetable</a>
+                <a href="#gallery" class="block px-3 py-2 text-gray-700 hover:text-purple-600">Gallery</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg min-h-screen flex items-center justify-center text-white pt-16 relative overflow-hidden">
+        <!-- Animated sparkles -->
+        <div class="sparkle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="sparkle" style="top: 30%; right: 15%; animation-delay: 0.5s;"></div>
+        <div class="sparkle" style="bottom: 40%; left: 20%; animation-delay: 1s;"></div>
+        <div class="sparkle" style="top: 60%; right: 25%; animation-delay: 1.5s;"></div>
+        <div class="sparkle" style="bottom: 20%; right: 10%; animation-delay: 2s;"></div>
+        
+        <div class="text-center px-4 relative z-10">
+      <!-- Logo Container with only circular image -->
+<div class="logo-container bounce-in pulse-glow" style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);">
+    <img src="vismayah.jpg" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" alt="Logo Image">
+</div>
+
+
+            
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 bounce-in floating" style="animation-delay: 0.3s; background: linear-gradient(45deg, #fff, #feca57, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                VISMAYAH 2025
+            </h1>
+            
+            <p class="text-2xl md:text-3xl mb-8 slide-up font-semibold" style="animation-delay: 0.6s; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                Data Science Excellence Summit
+            </p>
+            
+            <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-8 mb-8 slide-up pulse-glow border border-white border-opacity-30" style="animation-delay: 0.9s;">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="text-4xl mr-3 floating">📅</div>
+                    <h3 class="text-3xl font-bold">Event Dates</h3>
+                </div>
+                <p class="text-2xl font-semibold">July 30-31, 2025</p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <div class="text-center">
+                        <div class="text-2xl">🏆</div>
+                        <p class="text-sm">Competitions</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl">🎤</div>
+                        <p class="text-sm">Speeches</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl">🚀</div>
+                        <p class="text-sm">Innovation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="scrollToSection('about')" class="bg-gradient-to-r from-pink-500 to-yellow-500 text-white px-12 py-4 rounded-full font-bold text-xl hover:from-pink-600 hover:to-yellow-600 transition-all duration-300 transform hover:scale-105 slide-up shadow-2xl" style="animation-delay: 1.2s;">
+                🌟 Explore Summit 🌟
+            </button>
+        </div>
+        
+        <!-- Floating geometric shapes -->
+        <div class="absolute top-20 left-10 w-16 h-16 bg-white bg-opacity-20 rounded-full floating" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-32 right-16 w-12 h-12 bg-yellow-400 bg-opacity-30 transform rotate-45 floating" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/3 right-8 w-8 h-8 bg-pink-400 bg-opacity-40 rounded-full floating" style="animation-delay: 1.5s;"></div>
+        <div class="absolute bottom-1/4 left-12 w-20 h-20 border-4 border-white border-opacity-30 rounded-full floating" style="animation-delay: 0.5s;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full opacity-20 floating" style="animation-delay: 0s;"></div>
+        <div class="absolute bottom-20 right-20 w-24 h-24 bg-gradient-to-r from-blue-400 to-teal-400 rounded-full opacity-20 floating" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 right-10 w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 transform rotate-45 opacity-20 floating" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent mb-6 floating">About Vismayah 2025</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                    Vismayah 2025 is our college's premier Datascience event, bringing together students, faculty, and the community 
+                    for two days of incredible competitions, inspiring speeches, and unforgettable memories. Join us for an 
+                    extraordinary celebration of talent, knowledge, and creativity.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center card-hover bg-gradient-to-br from-purple-400 via-pink-400 to-red-400 text-white p-8 rounded-2xl fade-in shadow-2xl transform hover:scale-105 transition-all duration-300">
+                    <div class="text-5xl mb-4 floating">🏆</div>
+                    <h3 class="text-2xl font-bold mb-3">Competitions</h3>
+                    <p class="text-purple-100">Exciting contests across multiple categories showcasing student talents</p>
+                    <div class="mt-4 bg-white bg-opacity-20 rounded-full px-4 py-2 text-sm font-semibold">4 Categories</div>
+                </div>
+                
+                <div class="text-center card-hover bg-gradient-to-br from-blue-400 via-teal-400 to-green-400 text-white p-8 rounded-2xl fade-in shadow-2xl transform hover:scale-105 transition-all duration-300" style="animation-delay: 0.2s;">
+                    <div class="text-5xl mb-4 floating" style="animation-delay: 0.5s;">🎤</div>
+                    <h3 class="text-2xl font-bold mb-3">Faculty Speeches</h3>
+                    <p class="text-blue-100">Inspiring talks from our distinguished faculty members</p>
+                    <div class="mt-4 bg-white bg-opacity-20 rounded-full px-4 py-2 text-sm font-semibold">4 Speakers</div>
+                </div>
+                
+                <div class="text-center card-hover bg-gradient-to-br from-yellow-400 via-orange-400 to-red-400 text-white p-8 rounded-2xl fade-in shadow-2xl transform hover:scale-105 transition-all duration-300" style="animation-delay: 0.4s;">
+                    <div class="text-5xl mb-4 floating" style="animation-delay: 1s;">📸</div>
+                    <h3 class="text-2xl font-bold mb-3">Memorable Moments</h3>
+                    <p class="text-yellow-100">Capturing beautiful memories that will last a lifetime</p>
+                    <div class="mt-4 bg-white bg-opacity-20 rounded-full px-4 py-2 text-sm font-semibold">2 Days</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitions Section -->
+    <section id="competitions" class="py-20 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 relative overflow-hidden">
+        <!-- Animated background patterns -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-40 h-40 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full floating"></div>
+            <div class="absolute bottom-32 right-32 w-28 h-28 bg-gradient-to-r from-blue-500 to-teal-500 transform rotate-12 floating" style="animation-delay: 1.5s;"></div>
+            <div class="absolute top-1/2 left-1/4 w-20 h-20 bg-gradient-to-r from-yellow-500 to-red-500 rounded-full floating" style="animation-delay: 3s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6 floating">Competitions</h2>
+                <p class="text-xl text-gray-700 font-medium">Showcase your talents in these exciting competitions</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-pink-500 via-red-500 to-orange-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 hover:rotate-1 transition-all duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4 floating">🎨</div>
+                        <h3 class="text-2xl font-bold">Design Expression Arena</h3>
+                    </div>
+                    <p class="mb-6 text-pink-100 leading-relaxed">Showcase your creative design skills and artistic expression through various design challenges</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-semibold">Creative Challenge</span>
+                        <span class="text-2xl floating" style="animation-delay: 0.5s;">✨</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 hover:rotate-1 transition-all duration-300" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4 floating" style="animation-delay: 0.3s;">📊</div>
+                        <h3 class="text-2xl font-bold">PPT and Poster Presentation</h3>
+                    </div>
+                    <p class="mb-6 text-blue-100 leading-relaxed">Present your ideas effectively through compelling presentations and creative posters</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-semibold">Communication Skills</span>
+                        <span class="text-2xl floating" style="animation-delay: 0.8s;">🎯</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-500 via-teal-500 to-cyan-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 hover:rotate-1 transition-all duration-300" style="animation-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4 floating" style="animation-delay: 0.6s;">💻</div>
+                        <h3 class="text-2xl font-bold">Master the Art of Code Correction</h3>
+                    </div>
+                    <p class="mb-6 text-green-100 leading-relaxed">Test your programming skills by identifying and fixing code errors efficiently</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-semibold">Technical Skills</span>
+                        <span class="text-2xl floating" style="animation-delay: 1.1s;">⚡</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-yellow-500 via-orange-500 to-red-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 hover:rotate-1 transition-all duration-300" style="animation-delay: 0.6s;">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4 floating" style="animation-delay: 0.9s;">🚀</div>
+                        <h3 class="text-2xl font-bold">Project Expo</h3>
+                    </div>
+                    <p class="mb-6 text-yellow-100 leading-relaxed">Display your innovative projects and technical solutions to real-world problems</p>
+                    <div class="flex justify-between items-center">
+                        <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-semibold">Innovation Hub</span>
+                        <span class="text-2xl floating" style="animation-delay: 1.4s;">🌟</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Speeches Section -->
+    <section id="speeches" class="py-20 bg-gradient-to-br from-teal-100 via-cyan-50 to-blue-100 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-16 right-16 w-36 h-36 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full floating"></div>
+            <div class="absolute bottom-24 left-24 w-28 h-28 bg-gradient-to-r from-cyan-500 to-purple-500 transform rotate-45 floating" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/3 left-1/3 w-20 h-20 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full floating" style="animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent mb-6 floating">Faculty Speeches</h2>
+                <p class="text-xl text-gray-700 font-medium">Inspiring words from our distinguished faculty members</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 floating">
+                            <span class="text-3xl">👨‍🏫</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Pradeep Kumar Sir</h3>
+                            <p class="text-emerald-100 text-sm">Principal, Aditya Women's Degree College, Gajuwaka</p>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-xl p-4 mb-4">
+                        <p class="font-bold text-lg mb-2">"Innovative Ideas and Implementing the Real Future"</p>
+                    </div>
+                    <ul class="text-emerald-100 mb-6 space-y-2">
+                        <li class="flex items-center"><span class="mr-2">💡</span>Innovation drives progress in education</li>
+                        <li class="flex items-center"><span class="mr-2">🔧</span>Practical implementation of theoretical knowledge</li>
+                        <li class="flex items-center"><span class="mr-2">🚀</span>Building sustainable career paths</li>
+                        <li class="flex items-center"><span class="mr-2">📱</span>Embracing digital transformation</li>
+                    </ul>
+                    <div class="bg-white bg-opacity-20 rounded-full px-4 py-2 text-center font-semibold">
+                        📅 July 30, 1:00 PM - 1:15 PM
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 transition-all duration-300" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 floating" style="animation-delay: 0.3s;">
+                            <span class="text-3xl">👨‍💼</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Srinu Sir</h3>
+                            <p class="text-blue-100 text-sm">Vice Principal, Aditya Women's Degree College</p>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-xl p-4 mb-4">
+                        <p class="font-bold text-lg mb-2">"Building Better Foundations to Brighten Your Future"</p>
+                    </div>
+                    <ul class="text-blue-100 mb-6 space-y-2">
+                        <li class="flex items-center"><span class="mr-2">👑</span>Developing leadership qualities</li>
+                        <li class="flex items-center"><span class="mr-2">💬</span>Building strong communication skills</li>
+                        <li class="flex items-center"><span class="mr-2">📚</span>Importance of continuous learning</li>
+                        <li class="flex items-center"><span class="mr-2">🌟</span>Creating positive impact in society</li>
+                    </ul>
+                    <div class="bg-white bg-opacity-20 rounded-full px-4 py-2 text-center font-semibold">
+                        📅 July 30, 1:15 PM - 1:30 PM
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 transition-all duration-300" style="animation-delay: 0.4s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 floating" style="animation-delay: 0.6s;">
+                            <span class="text-3xl">👨‍💻</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">K. Sairatnam Sir</h3>
+                            <p class="text-purple-100 text-sm">HOD of Data Science & AI, Aditya Women's Degree College</p>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-xl p-4 mb-4">
+                        <p class="font-bold text-lg mb-2">"Data Science and AI: Rising Technologies Transforming the World"</p>
+                    </div>
+                    <ul class="text-purple-100 mb-6 space-y-2">
+                        <li class="flex items-center"><span class="mr-2">🤖</span>AI revolution transforming industries</li>
+                        <li class="flex items-center"><span class="mr-2">📊</span>Importance of data-driven decision making</li>
+                        <li class="flex items-center"><span class="mr-2">💼</span>Career opportunities in emerging technologies</li>
+                        <li class="flex items-center"><span class="mr-2">🧠</span>Building analytical thinking skills</li>
+                    </ul>
+                    <div class="bg-white bg-opacity-20 rounded-full px-4 py-2 text-center font-semibold">
+                        📅 July 30, 1:30 PM - 1:40 PM
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 text-white p-8 rounded-2xl card-hover fade-in shadow-2xl transform hover:scale-105 transition-all duration-300" style="animation-delay: 0.6s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4 floating" style="animation-delay: 0.9s;">
+                            <span class="text-3xl">👩‍🏫</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">B. Pavani Mam</h3>
+                            <p class="text-orange-100 text-sm">HOD of Data Science, Aditya Women's Degree College</p>
+                        </div>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded-xl p-4 mb-4">
+                        <p class="font-bold text-lg mb-2">"Student Aspirations: Career Do's and Don'ts for Success"</p>
+                    </div>
+                    <ul class="text-orange-100 mb-6 space-y-2">
+                        <li class="flex items-center"><span class="mr-2">🎯</span>Setting realistic career goals</li>
+                        <li class="flex items-center"><span class="mr-2">⚠️</span>Avoiding common career mistakes</li>
+                        <li class="flex items-center"><span class="mr-2">🤝</span>Building professional networks</li>
+                        <li class="flex items-center"><span class="mr-2">⚖️</span>Balancing passion with practicality</li>
+                    </ul>
+                    <div class="bg-white bg-opacity-20 rounded-full px-4 py-2 text-center font-semibold">
+                        📅 July 30, 1:40 PM - 1:45 PM
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timetable Section -->
+    <section id="timetable" class="py-20 bg-gradient-to-br from-rose-100 via-orange-50 to-yellow-100 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-rose-500 to-pink-500 rounded-full floating"></div>
+            <div class="absolute bottom-20 right-20 w-28 h-28 bg-gradient-to-r from-orange-500 to-yellow-500 transform rotate-45 floating" style="animation-delay: 1.5s;"></div>
+            <div class="absolute top-1/2 right-1/4 w-24 h-24 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full floating" style="animation-delay: 2.5s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-rose-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent mb-6 floating">Event Timetable</h2>
+                <p class="text-xl text-gray-700 font-medium">Complete schedule for both days of Vismayah 2025</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Day 1 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden fade-in transform hover:scale-105 transition-all duration-300">
+                    <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 text-white p-8 relative">
+                        <div class="absolute top-4 right-4 text-4xl floating">🌟</div>
+                        <h3 class="text-3xl font-bold mb-2">Day 1</h3>
+                        <p class="text-xl text-purple-100">July 30, 2025</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-xl border-l-4 border-purple-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating">🎤</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-purple-800">Faculty Speeches</div>
+                                            <div class="text-sm text-purple-600">Inspiring talks from distinguished faculty</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-purple-600 text-white px-4 py-2 rounded-full font-bold text-sm">1:00 PM - 1:45 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-green-50 to-teal-50 p-6 rounded-xl border-l-4 border-green-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating" style="animation-delay: 0.3s;">💻</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-green-800">Master the Art of Code Correction</div>
+                                            <div class="text-sm text-green-600">Programming challenge competition</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-green-600 text-white px-4 py-2 rounded-full font-bold text-sm">1:45 PM - 3:15 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border-l-4 border-orange-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating" style="animation-delay: 0.6s;">🎨</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-orange-800">Design Expression Arena</div>
+                                            <div class="text-sm text-orange-600">Creative design competition</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-orange-600 text-white px-4 py-2 rounded-full font-bold text-sm">3:15 PM - 4:30 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-blue-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating" style="animation-delay: 0.9s;">🎯</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-blue-800">Day 1 Wrap-up</div>
+                                            <div class="text-sm text-blue-600">Summary & Day 2 Preview</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-blue-600 text-white px-4 py-2 rounded-full font-bold text-sm">4:30 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Day 2 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden fade-in transform hover:scale-105 transition-all duration-300" style="animation-delay: 0.2s;">
+                    <div class="bg-gradient-to-r from-blue-600 via-teal-600 to-green-600 text-white p-8 relative">
+                        <div class="absolute top-4 right-4 text-4xl floating" style="animation-delay: 0.5s;">🚀</div>
+                        <h3 class="text-3xl font-bold mb-2">Day 2</h3>
+                        <p class="text-xl text-blue-100">July 31, 2025</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="bg-gradient-to-r from-teal-50 to-cyan-50 p-6 rounded-xl border-l-4 border-teal-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating" style="animation-delay: 0.2s;">📢</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-teal-800">Competition Introduction</div>
+                                            <div class="text-sm text-teal-600">Basic speech about competitions</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-teal-600 text-white px-4 py-2 rounded-full font-bold text-sm">1:15 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 rounded-xl border-l-4 border-indigo-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating" style="animation-delay: 0.5s;">📊</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-indigo-800">PPT and Poster Presentation</div>
+                                            <div class="text-sm text-indigo-600">Presentation competition</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-indigo-600 text-white px-4 py-2 rounded-full font-bold text-sm">1:15 PM - 2:00 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-pink-50 to-rose-50 p-6 rounded-xl border-l-4 border-pink-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating" style="animation-delay: 0.8s;">🚀</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-pink-800">Project Expo</div>
+                                            <div class="text-sm text-pink-600">Student project showcase</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm">2:00 PM - 3:30 PM</div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-l-4 border-yellow-500 transform hover:scale-105 transition-all duration-300">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3 floating" style="animation-delay: 1.1s;">🏆</span>
+                                        <div>
+                                            <div class="font-bold text-lg text-yellow-800">Prize Distribution & Closing</div>
+                                            <div class="text-sm text-yellow-600">Awards ceremony for winners</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-yellow-600 text-white px-4 py-2 rounded-full font-bold text-sm">3:30PM-5:00PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+<section id="gallery" class="py-20 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 relative overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-16 left-16 w-40 h-40 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full floating"></div>
+        <div class="absolute bottom-16 right-16 w-32 h-32 bg-gradient-to-r from-pink-500 to-red-500 transform rotate-45 floating" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-1/2 w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full floating" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-6 floating">Event Gallery</h2>
+            <p class="text-xl text-gray-700 font-medium">Capturing the beautiful moments of Vismayah 2025</p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- 20 Photos -->
+            <!-- Repeat the following block for each image -->
+            <!-- photo1.jpg to photo20.jpg -->
+            <!-- Example below for all 20 -->
+            <!-- Update image paths if needed -->
+            <!-- You can add alt text and titles if needed -->
+
+            <!-- Image Items -->
+            <!-- Use object-cover for perfect cropping -->
+            <!-- Add `loading="lazy"` for better performance -->
+
+            <!-- START OF 20 PHOTOS -->
+            <!-- You can copy this and replace photoX.jpg with your real image names -->
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo1.jpg" alt="Gallery Photo 1" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo2.jpg" alt="Gallery Photo 2" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo3.jpg" alt="Gallery Photo 3" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo4.jpg" alt="Gallery Photo 4" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo5.jpg" alt="Gallery Photo 5" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo6.jpg" alt="Gallery Photo 6" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo7.jpg" alt="Gallery Photo 7" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo8.jpg" alt="Gallery Photo 8" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo9.jpg" alt="Gallery Photo 9" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo10.jpg" alt="Gallery Photo 10" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo11.jpg" alt="Gallery Photo 11" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo12.jpg" alt="Gallery Photo 12" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo13.jpg" alt="Gallery Photo 13" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo14.jpg" alt="Gallery Photo 14" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo15.jpg" alt="Gallery Photo 15" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo16.jpg" alt="Gallery Photo 16" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo17.jpg" alt="Gallery Photo 17" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo18.jpg" alt="Gallery Photo 18" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo19.jpg" alt="Gallery Photo 19" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <div class="gallery-item aspect-square rounded-2xl overflow-hidden shadow-2xl fade-in transform hover:scale-110 hover:rotate-3 transition-all duration-300">
+                <img src="photo20.jpg" alt="Gallery Photo 20" class="object-cover w-full h-full" loading="lazy" />
+            </div>
+            <!-- END OF 20 PHOTOS -->
+        </div>
+       <!-- Event Poster Section -->
+          <section id="event-poster" class="py-16 bg-white text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Event Poster</h2>
+    
+    <div class="flex justify-center">
+        <img src="poster.png" alt="Event Poster" class="w-full max-w-md rounded-lg shadow-lg">
+    </div>
+</section>
+
+        <!-- Upload Prompt -->
+        <div class="text-center mt-16 fade-in">
+            <div class="bg-white bg-opacity-80 backdrop-blur-sm rounded-2xl p-8 inline-block shadow-2xl">
+                <p class="text-xl text-gray-700 mb-6 font-medium"></p>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 text-white py-16 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full floating"></div>
+            <div class="absolute bottom-10 right-10 w-24 h-24 bg-gradient-to-r from-blue-500 to-teal-500 transform rotate-45 floating" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 left-1/2 w-20 h-20 bg-gradient-to-r from-pink-500 to-red-500 rounded-full floating" style="animation-delay: 2s;"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center md:text-left">
+                    <div class="bg-gradient-to-r from-purple-400 to-pink-400 w-16 h-16 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 floating">
+                        <span class="text-2xl">🎓</span>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Vismayah 2025</h3>
+                    <p class="text-gray-300 leading-relaxed">Data Science Excellence Summit celebrating talent, creativity, and innovation in the digital age.</p>
+                </div>
+                
+                <div class="text-center md:text-left">
+                    <h4 class="text-xl font-bold mb-6 text-blue-400">Event Details</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-center md:justify-start">
+                            <span class="text-2xl mr-3 floating">📅</span>
+                            <p class="text-gray-300">July 30-31, 2025</p>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start">
+                            <span class="text-2xl mr-3 floating" style="animation-delay: 0.2s;">📍</span>
+                            <p class="text-gray-300">College Main Campus</p>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start">
+                            <span class="text-2xl mr-3 floating" style="animation-delay: 0.4s;">🎯</span>
+                            <p class="text-gray-300">Multiple Competitions</p>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start">
+                            <span class="text-2xl mr-3 floating" style="animation-delay: 0.6s;">🎤</span>
+                            <p class="text-gray-300">Faculty Speeches</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center md:text-left">
+                    <h4 class="text-xl font-bold mb-6 text-green-400">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-center md:justify-start">
+                            <span class="text-2xl mr-3 floating">📧</span>
+                            <p class="text-gray-300">vismayah2025@college.edu</p>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start">
+                            <span class="text-2xl mr-3 floating" style="animation-delay: 0.3s;">📞</span>
+                            <p class="text-gray-300">+91 98765 43210</p>
+                        </div>
+                        <div class="flex items-center justify-center md:justify-start">
+                            <span class="text-2xl mr-3 floating" style="animation-delay: 0.6s;">🌐</span>
+                            <p class="text-gray-300">www.college.edu/vismayah</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gradient-to-r from-purple-500 to-pink-500 mt-12 pt-8">
+                <div class="bg-gradient-to-r from-purple-800 to-indigo-800 rounded-2xl p-6 text-center">
+                    <p class="text-lg font-medium bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
+                        &copy; 2025 Vismayah College Event. All rights reserved. ✨
+                    </p>
+                    <div class="flex justify-center space-x-4 mt-4">
+                        <span class="text-2xl floating">🌟</span>
+                        <span class="text-2xl floating" style="animation-delay: 0.5s;">💫</span>
+                        <span class="text-2xl floating" style="animation-delay: 1s;">⭐</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Gallery -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modalContent" class="modal-content"></div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Add click event listeners to all navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Fade in animation on scroll
+        function fadeInOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Gallery modal functions
+        function openModal(element) {
+            const modal = document.getElementById('imageModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            // Clone the clicked element for the modal
+            const clonedElement = element.cloneNode(true);
+            clonedElement.classList.remove('gallery-item');
+            clonedElement.classList.add('modal-content');
+            clonedElement.style.transform = 'none';
+            clonedElement.style.cursor = 'default';
+            
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clonedElement);
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trigger initial fade-in animations
+            setTimeout(fadeInOnScroll, 100);
+            
+            // Add hover effects to competition cards
+            const competitionCards = document.querySelectorAll('.competition-card');
+            competitionCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9679795c51393bda',t:'MTc1MzkyNjkzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
